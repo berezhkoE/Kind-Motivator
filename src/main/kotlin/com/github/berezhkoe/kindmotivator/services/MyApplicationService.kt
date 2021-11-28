@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.berezhkoe.kindmotivator.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.berezhkoe.kindmotivator.MyBundle
 
 class MyApplicationService {
 
