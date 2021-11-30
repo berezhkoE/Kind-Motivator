@@ -118,7 +118,7 @@ class KindEditorFactoryListener : EditorFactoryListener {
         val sinceLastActivityMs = now - lastActivityMs
         if (sinceLastActivityMs <= idleThresholdMs && sinceLastTickMs >= TICK_JUMP_DETECTION_THRESHOLD_MS) {
             lastTickMs = now
-            MotivationShower.showRandomMeme(MotivationType.Support,
+            MotivationShower.showRandomMeme(MotivationType.Rest,
                 "${kindSettings.motivationAfterContinuousWork} minutes passed!",
                 editor!!.project!!
             )

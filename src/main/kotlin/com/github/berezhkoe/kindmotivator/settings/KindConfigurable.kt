@@ -24,11 +24,11 @@ class KindConfigurable: BoundSearchableConfigurable("Kind Motivator", "Kind Moti
             }.largeGapAfter()
             row {
                 label("Motivation after Continuous Work, min: ")
-                intTextField(settings::motivationAfterContinuousWork, range = IntRange(5, 180))
+                intTextField(settings::motivationAfterContinuousWork, range = IntRange(2, 180))
             }
             row {
                 label("Idle Threshold, min: ")
-                intTextField(settings::motivationAfterContinuousWork, range = IntRange(1, 180))
+                intTextField(settings::idleThreshold, range = IntRange(1, 180))
             }
         }
     }
