@@ -12,7 +12,7 @@
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.berezhkoe.kindmotivator.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
+        <listener class="com.github.berezhkoe.kindmotivator.listeners.MotivationExecutionListener"
+                  topic="com.intellij.execution.ExecutionListener"/>
     </applicationListeners>
 </idea-plugin>
