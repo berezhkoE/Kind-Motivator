@@ -1,5 +1,6 @@
 package com.github.berezhkoe.kindmotivator.notification
 
+import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopup
@@ -83,8 +84,10 @@ class MemeNotificationService {
             popup.show(point)
 
             AppExecutorUtil.getAppScheduledExecutorService().schedule({
-                popup.cancel()
-                shownPopup.compareAndSet(popup, null)
+                invokeLater {
+                    popup.cancel()
+                    shownPopup.compareAndSet(popup, null)
+                }
             }, TIMEOUT_SECONDS, TimeUnit.SECONDS)
 
             popup
