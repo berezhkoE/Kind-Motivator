@@ -31,10 +31,10 @@ class MemeNotificationService {
         private val shownPopup = AtomicReference<JBPopup>()
     }
 
-    fun showMeme(title: String, resourcePath: Path, project: Project) {
+    fun showMeme(resourcePath: Path, project: Project) {
         val ideFrame = WindowManager.getInstance().getIdeFrame(project) ?: error("This project has no window")
         val imageIcon = getImageIcon(resourcePath, ideFrame.component.size)
-        showMeme(title, imageIcon, project)
+        showMeme(imageIcon, project)
     }
 
     private fun getImageIcon(resourcePath: Path, ideFrameSize: Dimension) : ImageIcon {
@@ -55,14 +55,14 @@ class MemeNotificationService {
         return ImageIcon(image)
     }
 
-    private fun showMeme(title: String, imageIcon: ImageIcon, project: Project) {
+    private fun showMeme(imageIcon: ImageIcon, project: Project) {
         val label = JLabel(imageIcon)
 
         val popup = JBPopupFactory.getInstance()
                 .createComponentPopupBuilder(
                         label,
                         null
-                ).setTitle(title)
+                )
                 .setMovable(true)
                 .setProject(project)
                 .setCancelButton(MinimizeButton("Hide"))
