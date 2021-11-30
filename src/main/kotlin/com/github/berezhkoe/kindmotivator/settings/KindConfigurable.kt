@@ -16,12 +16,12 @@ class KindConfigurable: BoundSearchableConfigurable("Kind Motivator", "Kind Moti
     override fun createPanel(): DialogPanel {
         return panel {
             row {
-                label("Motivation frequency after Execution Fail, min: ")
-                intTextField(settings::motivationFrequencyAfterExecFail, range = IntRange(5, 180))
+                label("Motivation frequency after Execution Fail, times: ")
+                intTextField(settings::motivationFrequencyAfterExecFail, range = IntRange(1, 100))
             }
             row {
-                label("Motivation frequency after non zero Exit Code, min: ")
-                intTextField(settings::motivationFrequencyAfterNonZeroExitCode, range = IntRange(5, 180))
+                label("Motivation frequency after non zero Exit Code, times: ")
+                intTextField(settings::motivationFrequencyAfterNonZeroExitCode, range = IntRange(1, 100))
             }
         }
     }

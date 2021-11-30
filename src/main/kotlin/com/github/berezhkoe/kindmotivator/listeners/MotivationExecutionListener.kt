@@ -1,5 +1,6 @@
 package com.github.berezhkoe.kindmotivator.listeners
 
+import com.github.berezhkoe.kindmotivator.settings.KindSettings
 import com.intellij.execution.ExecutionListener
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.runners.ExecutionEnvironment
@@ -9,13 +10,16 @@ internal class MotivationExecutionListener : ExecutionListener {
     companion object {
         private const val notStartedCountName = "not_started_times"
         private const val terminatedCountName = "terminated_times"
-        private const val notStartedCountNeeded = 5
-        private const val terminatedCountNeeded = 5
+
+        private val notStartedCountNeeded
+            get() = KindSettings.getInstance().motivationFrequencyAfterExecFail
+
+        private val terminatedCountNeeded
+            get() = KindSettings.getInstance().motivationFrequencyAfterNonZeroExitCode
     }
-    
+
     override fun processNotStarted(executorId: String, env: ExecutionEnvironment) {
         super.processNotStarted(executorId, env)
-        env.project
         val counter = incrementCounter(notStartedCountName)
         if (counter % notStartedCountNeeded == 0) {
             motivateFail(env.project)
