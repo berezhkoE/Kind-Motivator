@@ -24,4 +24,16 @@ class KindSettings : SimplePersistentStateComponent<KindState>(KindState()) {
         set(value) {
             state.motivationFrequencyAfterNonZeroExitCode = value
         }
+
+    var motivationAfterContinuousWork
+        get() = state.motivationAfterContinuousWork
+        set(value) {
+            state.motivationAfterContinuousWork = value
+        }
+
+    var idleThreshold
+        get() = state.idleThreshold
+        set(value) {
+            state.idleThreshold = value
+        }
 }

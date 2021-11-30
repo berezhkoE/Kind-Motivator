@@ -12,7 +12,10 @@ import com.intellij.util.concurrency.AppExecutorUtil
 import java.awt.Dimension
 import java.awt.Image
 import java.awt.Point
+import java.awt.event.MouseEvent
+import java.awt.event.MouseListener
 import java.nio.file.Path
+import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 import javax.swing.ImageIcon
@@ -31,6 +34,8 @@ class MemeNotificationService {
 
         private val shownPopup = AtomicReference<JBPopup>()
     }
+
+    private var fadeOutPopupFuture: ScheduledFuture<*>? = null
 
     fun showMeme(title: String, resourcePath: Path, project: Project) {
         val ideFrame = WindowManager.getInstance().getIdeFrame(project) ?: error("This project has no window")
@@ -71,6 +76,31 @@ class MemeNotificationService {
                 .setCancelOnClickOutside(false)
                 .createPopup()
 
+        popup.content.addMouseListener(object : MouseListener {
+            override fun mouseClicked(e: MouseEvent?) {
+            }
+
+            override fun mousePressed(e: MouseEvent?) {
+            }
+
+            override fun mouseReleased(e: MouseEvent?) {
+            }
+
+            override fun mouseEntered(e: MouseEvent?) {
+                fadeOutPopupFuture?.cancel(true)
+            }
+
+            override fun mouseExited(e: MouseEvent?) {
+                fadeOutPopupFuture = AppExecutorUtil.getAppScheduledExecutorService().schedule({
+                    invokeLater {
+                        popup.cancel()
+                        shownPopup.compareAndSet(popup, null)
+                    }
+                }, TIMEOUT_SECONDS - 2, TimeUnit.SECONDS)
+            }
+
+        })
+
         val ideFrame = WindowManager.getInstance().getIdeFrame(project)!!
 
         val point = RelativePoint.getNorthEastOf(ideFrame.component).let { pointNE ->
@@ -84,7 +114,7 @@ class MemeNotificationService {
 
             popup.show(point)
 
-            AppExecutorUtil.getAppScheduledExecutorService().schedule({
+            fadeOutPopupFuture = AppExecutorUtil.getAppScheduledExecutorService().schedule({
                 invokeLater {
                     popup.cancel()
                     shownPopup.compareAndSet(popup, null)

@@ -11,4 +11,11 @@ class KindState: BaseState() {
      * частота поддержки при ненулевом коде
      */
     var motivationFrequencyAfterNonZeroExitCode by property(5)
+
+    /**
+     * мотивация за непрерывную работу, мин
+     */
+    var motivationAfterContinuousWork by property(2)
+
+    var idleThreshold by property(1)
 }
