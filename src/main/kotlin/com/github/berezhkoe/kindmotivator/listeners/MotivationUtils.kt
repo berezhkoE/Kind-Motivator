@@ -7,12 +7,12 @@ import com.intellij.openapi.project.Project
 
 internal fun motivateFail(project: Project) {
     invokeLater {
-        MotivationShower.showMeme(MotivationType.Support, "Крепись...", "klichko.jpg", project)
+        MotivationShower.showRandomMeme(MotivationType.Support, "Крепись...", project)
     }
 }
 
 internal fun motivateSuccess(project: Project) {
     invokeLater {
-        MotivationShower.showMeme(MotivationType.Praise, "Ура!", "leonardo-dicaprio-cheers.gif", project)
+        MotivationShower.showRandomMeme(MotivationType.Praise, "Ура!", project)
     }
 }
