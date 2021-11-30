@@ -9,6 +9,11 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.berezhkoe.kindmotivator.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.berezhkoe.kindmotivator.services.MyProjectService"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="com.github.berezhkoe.kindmotivator.settings.KindConfigurable"
+                                 id="Settings.CognitiveComplexity"/>
+        <applicationService
+                serviceImplementation="com.github.berezhkoe.kindmotivator.settings.KindSettings"/>
     </extensions>
 
     <applicationListeners>
