@@ -8,6 +8,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.berezhkoe.kindmotivator.services.MyApplicationService"/>
+        <applicationService serviceImplementation="com.github.berezhkoe.kindmotivator.notification.MemeNotificationService"/>
         <projectService serviceImplementation="com.github.berezhkoe.kindmotivator.services.MyProjectService"/>
         <applicationConfigurable parentId="tools"
                                  instance="com.github.berezhkoe.kindmotivator.settings.KindConfigurable"
