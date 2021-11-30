@@ -68,6 +68,7 @@ class MemeNotificationService {
                 .setTitle(title)
                 .setProject(project)
                 .setCancelButton(MinimizeButton("Hide"))
+                .setCancelOnClickOutside(false)
                 .createPopup()
 
         val ideFrame = WindowManager.getInstance().getIdeFrame(project)!!
