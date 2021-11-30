@@ -21,7 +21,7 @@ class MemeNotificationService {
     companion object {
         fun getInstance() = service<MemeNotificationService>()
 
-        fun memePathByName(memeFileName: String) = Path.of("memes", memeFileName)
+        fun memePath(vararg memePathComponents: String) = Path.of("memes", *memePathComponents)
 
         private const val MAX_IMAGE_HORIZONTAL_PORTION_OF_SCREEN = 4
         private const val MAX_IMAGE_VERTICAL_PORTION_OF_SCREEN = 3
