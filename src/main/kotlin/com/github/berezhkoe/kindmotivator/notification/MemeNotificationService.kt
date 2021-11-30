@@ -27,7 +27,7 @@ class MemeNotificationService {
         private const val MAX_IMAGE_HORIZONTAL_PORTION_OF_SCREEN = 4
         private const val MAX_IMAGE_VERTICAL_PORTION_OF_SCREEN = 3
 
-        private const val TIMEOUT_SECONDS = 3L
+        private const val TIMEOUT_SECONDS = 5L
 
         private val shownPopup = AtomicReference<JBPopup>()
     }
@@ -68,6 +68,7 @@ class MemeNotificationService {
                 .setTitle(title)
                 .setProject(project)
                 .setCancelButton(MinimizeButton("Hide"))
+                .setCancelOnClickOutside(false)
                 .createPopup()
 
         val ideFrame = WindowManager.getInstance().getIdeFrame(project)!!
