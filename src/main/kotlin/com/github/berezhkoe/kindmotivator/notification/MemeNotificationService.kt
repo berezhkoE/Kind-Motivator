@@ -2,6 +2,7 @@ package com.github.berezhkoe.kindmotivator.notification
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.popup.JBPopup
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.util.MinimizeButton
 import com.intellij.openapi.wm.WindowManager
@@ -12,6 +13,7 @@ import java.awt.Image
 import java.awt.Point
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicReference
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 
@@ -19,10 +21,14 @@ class MemeNotificationService {
     companion object {
         fun getInstance() = service<MemeNotificationService>()
 
+        fun memePathByName(memeFileName: String) = Path.of("memes", memeFileName)
+
         private const val MAX_IMAGE_HORIZONTAL_PORTION_OF_SCREEN = 4
         private const val MAX_IMAGE_VERTICAL_PORTION_OF_SCREEN = 3
 
         private const val TIMEOUT_SECONDS = 3L
+
+        private val shownPopup = AtomicReference<JBPopup>()
     }
 
     fun showMeme(title: String, resourcePath: Path, project: Project) {
@@ -69,10 +75,18 @@ class MemeNotificationService {
             RelativePoint(ideFrame.component, shiftedPoint)
         }
 
-        popup.show(point)
+        shownPopup.updateAndGet { existingPopup ->
+            if (existingPopup != null)
+                return@updateAndGet existingPopup
 
-        AppExecutorUtil.getAppScheduledExecutorService().schedule({
-            popup.cancel()
-        }, TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            popup.show(point)
+
+            AppExecutorUtil.getAppScheduledExecutorService().schedule({
+                popup.cancel()
+                shownPopup.compareAndSet(popup, null)
+            }, TIMEOUT_SECONDS, TimeUnit.SECONDS)
+
+            popup
+        }
     }
 }
