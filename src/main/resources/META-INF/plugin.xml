@@ -15,10 +15,14 @@
                                  id="Settings.CognitiveComplexity"/>
         <applicationService
                 serviceImplementation="com.github.berezhkoe.kindmotivator.settings.KindSettings"/>
+        <applicationService
+                serviceImplementation="com.github.berezhkoe.kindmotivator.listeners.MotivationListenersCounters"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.berezhkoe.kindmotivator.listeners.MotivationExecutionListener"
                   topic="com.intellij.execution.ExecutionListener"/>
+        <listener class="com.github.berezhkoe.kindmotivator.listeners.MotivationProjectManagerListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>
