@@ -8,6 +8,6 @@ internal class MotivationProjectManagerListener : ProjectManagerListener {
 
     override fun projectOpened(project: Project) {
         val connection = project.messageBus.connect()
-        connection.subscribe(SMTRunnerEventsListener.TEST_STATUS, MotivationSMTRunnerEventsListener())
+        connection.subscribe(SMTRunnerEventsListener.TEST_STATUS, MotivationSMTRunnerEventsListener(project))
     }
 }
