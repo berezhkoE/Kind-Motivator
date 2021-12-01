@@ -6,9 +6,10 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.runners.ExecutionEnvironment
 
 internal class MotivationExecutionListener : ExecutionListener {
-
-    private val settings
-        get() = MotivationListenersCounters.getInstance()
+    companion object {
+        private var notStartedCount = 0
+        private var terminatedCount = 0
+    }
 
     private val notStartedCountNeeded
         get() = KindSettings.getInstance().motivationFrequencyAfterExecFail
@@ -18,18 +19,18 @@ internal class MotivationExecutionListener : ExecutionListener {
 
     override fun processNotStarted(executorId: String, env: ExecutionEnvironment) {
         super.processNotStarted(executorId, env)
-        settings.notStartedCount++
-        if (settings.notStartedCount % notStartedCountNeeded == 0) {
+        notStartedCount++
+        if (notStartedCount % notStartedCountNeeded == 0) {
             motivateFail(env.project)
         }
     }
 
     override fun processStarted(executorId: String, env: ExecutionEnvironment, handler: ProcessHandler) {
         super.processStarted(executorId, env, handler)
-        if (settings.notStartedCount >= notStartedCountNeeded) {
+        if (notStartedCount >= notStartedCountNeeded) {
             motivateSuccess(env.project)
         }
-        settings.notStartedCount = 0
+        notStartedCount = 0
     }
 
     override fun processTerminated(
@@ -40,13 +41,13 @@ internal class MotivationExecutionListener : ExecutionListener {
     ) {
         super.processTerminated(executorId, env, handler, exitCode)
         if (exitCode == 0) {
-            if (settings.terminatedCount >= terminatedCountNeeded) {
+            if (terminatedCount >= terminatedCountNeeded) {
                 motivateSuccess(env.project)
             }
-            settings.terminatedCount = 0
+            terminatedCount = 0
         } else {
-            settings.terminatedCount++
-            if (settings.terminatedCount % terminatedCountNeeded == 0) {
+            terminatedCount++
+            if (terminatedCount % terminatedCountNeeded == 0) {
                 motivateFail(env.project)
             }
         }

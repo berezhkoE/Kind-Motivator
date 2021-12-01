@@ -14,8 +14,6 @@
         <applicationService
                 serviceImplementation="com.github.berezhkoe.kindmotivator.settings.KindSettings"/>
         <editorFactoryListener implementation="com.github.berezhkoe.kindmotivator.listeners.KindEditorFactoryListener"/>
-        <applicationService
-                serviceImplementation="com.github.berezhkoe.kindmotivator.listeners.MotivationListenersCounters"/>
     </extensions>
 
     <applicationListeners>
