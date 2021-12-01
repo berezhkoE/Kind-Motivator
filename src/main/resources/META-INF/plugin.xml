@@ -24,4 +24,13 @@
         <listener class="com.github.berezhkoe.kindmotivator.listeners.KindForcePushActionListener"
                   topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
     </applicationListeners>
+
+    <actions>
+        <action class="com.github.berezhkoe.kindmotivator.actions.ShowMemeAction"
+                id="com.github.berezhkoe.kindmotivator.actions.ShowMemeAction"
+                text="Show Meme" />
+        <action class="com.github.berezhkoe.kindmotivator.actions.OpenKindSettingsAction"
+                id="com.github.berezhkoe.kindmotivator.actions.OpenKindSettingsAction"
+                text="Show Kind Motivator Settings" />
+    </actions>
 </idea-plugin>
