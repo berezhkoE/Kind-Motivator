@@ -5,14 +5,14 @@ import com.github.berezhkoe.kindmotivator.notification.MotivationType
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.project.Project
 
-internal fun motivateFail(project: Project) {
+internal fun motivateFail(project: Project, title: String? = null) {
     invokeLater {
-        MotivationShower.showRandomMeme(MotivationType.Support, "Крепись...", project)
+        MotivationShower.showRandomMeme(MotivationType.Support, title ?:"Крепись...", project)
     }
 }
 
-internal fun motivateSuccess(project: Project) {
+internal fun motivateSuccess(project: Project, title: String? = null) {
     invokeLater {
-        MotivationShower.showRandomMeme(MotivationType.Praise, "Ура!", project)
+        MotivationShower.showRandomMeme(MotivationType.Praise, title ?: "Ура!", project)
     }
 }

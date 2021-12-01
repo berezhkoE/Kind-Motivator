@@ -31,11 +31,23 @@ class MotivationSMTRunnerEventsListener(private val project: Project) : SMTRunne
         }
         passedCountLast?.let {
             if (passedCount > passedCountLast!!) {
-                motivateSuccess(project)
+                val diff = passedCount - passedCountLast!!
+                motivateSuccess(project, "Еще " + diff + " " + getTestsAddition(diff) +" в копилочку")
             }
         }
 
         failedCountLast = failedCount
         passedCountLast = passedCount
+    }
+
+    private fun getTestsAddition(num: Int): String {
+        val preLastDigit = num % 100 / 10
+        return if (preLastDigit == 1) {
+            "тестов"
+        } else when (num % 10) {
+            1 -> "тест"
+            2, 3, 4 -> "теста"
+            else -> "тестов"
+        }
     }
 }
