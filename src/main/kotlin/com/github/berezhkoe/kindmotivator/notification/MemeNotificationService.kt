@@ -131,6 +131,7 @@ class MemeNotificationService: Disposable {
                     }
                 })
                 .setCancelOnClickOutside(false)
+                .setBelongsToGlobalPopupStack(false)
                 .createPopup()
 
         popup.addListener(object : JBPopupListener {
