@@ -16,3 +16,15 @@ internal fun motivateSuccess(project: Project, title: String? = null) {
         MotivationShower.showRandomMeme(MotivationType.Praise, title ?: "Ура!", project)
     }
 }
+
+internal fun motivateEarly(project: Project) {
+    invokeLater {
+        MotivationShower.showRandomMeme(MotivationType.Early, "С добрым утром, трудяга!", project)
+    }
+}
+
+internal fun motivateLate(project: Project) {
+    invokeLater {
+        MotivationShower.showRandomMeme(MotivationType.Late, "Ты заработался, друг :)", project)
+    }
+}
