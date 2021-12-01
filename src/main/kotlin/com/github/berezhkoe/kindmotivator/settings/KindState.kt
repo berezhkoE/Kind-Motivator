@@ -15,7 +15,7 @@ class KindState: BaseState() {
     /**
      * мотивация за непрерывную работу, мин
      */
-    var motivationAfterContinuousWork by property(2)
+    var motivationAfterContinuousWork by property(30)
 
-    var idleThreshold by property(1)
+    var idleThreshold by property(2)
 }

@@ -28,6 +28,6 @@ object MotivationShower {
 }
 
 enum class MotivationType(val pathBase: String) {
-    Praise("praise"), Rest("rest"), Support("support")
+    Praise("praise"), Rest("rest"), Support("support"), ForcePush("force_push")
 }
 
