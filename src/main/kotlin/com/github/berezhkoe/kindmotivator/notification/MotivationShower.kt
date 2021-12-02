@@ -9,9 +9,9 @@ import kotlin.streams.toList
 object MotivationShower {
     fun showMeme(motivationType: MotivationType, title: String, motivationFileName: String, project: Project) {
         MemeNotificationService.getInstance().showMeme(
-                title,
-                MemeNotificationService.memePath(motivationType.pathBase, motivationFileName),
-                project
+            title,
+            MemeNotificationService.memePath(motivationType.pathBase, motivationFileName),
+            project
         )
     }
 
@@ -28,6 +28,12 @@ object MotivationShower {
 }
 
 enum class MotivationType(val pathBase: String) {
-    Praise("praise"), Rest("rest"), Support("support"), ForcePush("force_push"), Early("early"), Late("late")
+    Praise("praise"),
+    Rest("rest"),
+    Support("support"),
+    ForcePush("force_push"),
+    Early("early"),
+    Late("late"),
+    Sql("sql")
 }
 

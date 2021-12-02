@@ -15,6 +15,7 @@
         <applicationService
                 serviceImplementation="com.github.berezhkoe.kindmotivator.settings.KindSettings"/>
         <editorFactoryListener implementation="com.github.berezhkoe.kindmotivator.listeners.KindEditorFactoryListener"/>
+        <editorFactoryListener implementation="com.github.berezhkoe.kindmotivator.listeners.KindSqlCreatedListener"/>
         <terminal.shellCommandHandler
                 implementation="com.github.berezhkoe.kindmotivator.listeners.KindTerminalCommandListener"/>
     </extensions>
