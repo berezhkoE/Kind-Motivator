@@ -30,6 +30,9 @@ class KindConfigurable: BoundSearchableConfigurable("Kind Motivator", "Kind Moti
                 label("Idle Threshold, min: ")
                 intTextField(settings::idleThreshold, range = IntRange(1, 180))
             }
+            row {
+                checkBox("Don't show many images one by one", settings::dontShowManyMemes)
+            }
         }
     }
 }

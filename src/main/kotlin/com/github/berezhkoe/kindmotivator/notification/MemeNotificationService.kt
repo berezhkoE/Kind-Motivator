@@ -1,6 +1,7 @@
 package com.github.berezhkoe.kindmotivator.notification
 
 import com.github.berezhkoe.kindmotivator.actions.OpenKindSettingsAction
+import com.github.berezhkoe.kindmotivator.settings.KindSettings
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.actionSystem.ActionPlaces
@@ -41,8 +42,6 @@ class MemeNotificationService: Disposable {
         private const val MAX_IMAGE_VERTICAL_PORTION_OF_SCREEN = 3
 
         private const val TIMEOUT_SECONDS = 5L
-
-        private const val SAVE_TO_QUEUE = true
     }
 
     private var shownPopup: JBPopup? = null
@@ -60,7 +59,7 @@ class MemeNotificationService: Disposable {
         val imageIcon = getImageIcon(resourcePath, ideFrame.component.size)
 
         if (shownPopup != null) {
-            if (SAVE_TO_QUEUE) {
+            if (!KindSettings.getInstance().dontShowManyMemes) {
                 memeQueue.add(ShowMemeTask(title, resourcePath, project))
             }
             return
@@ -89,7 +88,9 @@ class MemeNotificationService: Disposable {
         shownPopup = null
         if (memeQueue.isNotEmpty()) {
             val (title, memePath, project) = memeQueue.removeFirst()
-            showMemeUnderLock(title, memePath, project)
+            if (!KindSettings.getInstance().dontShowManyMemes) {
+                showMemeUnderLock(title, memePath, project)
+            }
         }
     }
 

@@ -36,4 +36,10 @@ class KindSettings : SimplePersistentStateComponent<KindState>(KindState()) {
         set(value) {
             state.idleThreshold = value
         }
+
+    var dontShowManyMemes
+        get() = state.dontShowManyMemes
+        set(value) {
+            state.dontShowManyMemes = value
+        }
 }

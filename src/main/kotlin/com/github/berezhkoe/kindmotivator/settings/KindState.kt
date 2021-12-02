@@ -18,4 +18,6 @@ class KindState: BaseState() {
     var motivationAfterContinuousWork by property(30)
 
     var idleThreshold by property(2)
+
+    var dontShowManyMemes by property(false)
 }
