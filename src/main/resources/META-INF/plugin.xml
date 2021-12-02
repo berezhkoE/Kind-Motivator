@@ -18,6 +18,7 @@
         <editorFactoryListener implementation="com.github.berezhkoe.kindmotivator.listeners.KindSqlCreatedListener"/>
         <terminal.shellCommandHandler
                 implementation="com.github.berezhkoe.kindmotivator.listeners.KindTerminalCommandListener"/>
+        <statusBarWidgetFactory implementation="com.github.berezhkoe.kindmotivator.tools.RandomMemeWidgetFactory"/>
     </extensions>
 
     <applicationListeners>
@@ -32,7 +33,9 @@
     <actions>
         <action class="com.github.berezhkoe.kindmotivator.actions.ShowMemeAction"
                 id="com.github.berezhkoe.kindmotivator.actions.ShowMemeAction"
-                text="Show Meme" />
+                text="Show Random Meme">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
         <action class="com.github.berezhkoe.kindmotivator.actions.OpenKindSettingsAction"
                 id="com.github.berezhkoe.kindmotivator.actions.OpenKindSettingsAction"
                 text="Show Kind Motivator Settings" />
