@@ -1,6 +1,7 @@
 package com.github.berezhkoe.kindmotivator.notification
 
 import com.github.berezhkoe.kindmotivator.actions.OpenKindSettingsAction
+import com.github.berezhkoe.kindmotivator.actions.ShowMemeAction
 import com.github.berezhkoe.kindmotivator.settings.KindSettings
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.Disposable
@@ -44,13 +45,30 @@ class MemeNotificationService: Disposable {
     }
 
     private var shownPopup: JBPopup? = null
+    private var shownMeme: ShowMemeTask? = null
     private var fadeOutPopupFuture: ScheduledFuture<*>? = null
 
     private val memeQueue = LinkedList<ShowMemeTask>()
+    private val titlesAllowedRepeat = mutableSetOf(ShowMemeAction.TITLE)
 
     @Synchronized
     fun showMeme(title: String, resourcePath: Path, project: Project) {
         showMemeUnderLock(title, resourcePath, project)
+    }
+
+    @Synchronized
+    fun allowTitleBeRepeated(title: String) {
+        titlesAllowedRepeat += title
+    }
+
+    @Synchronized
+    fun disallowTitleBeRepeated(title: String): Boolean {
+        return titlesAllowedRepeat.remove(title)
+    }
+
+    @Synchronized
+    fun isAllowedTitleBeRepeated(title: String): Boolean {
+        return title in titlesAllowedRepeat
     }
 
     private fun showMemeUnderLock(title: String, resourcePath: Path, project: Project) {
@@ -59,7 +77,9 @@ class MemeNotificationService: Disposable {
 
         if (shownPopup != null) {
             if (!KindSettings.getInstance().dontShowManyMemes) {
-                memeQueue.add(ShowMemeTask(title, resourcePath, project))
+                if (shownMeme?.title != title || isAllowedTitleBeRepeated(title)) {
+                    memeQueue.add(ShowMemeTask(title, resourcePath, project))
+                }
             }
             return
         }
@@ -70,6 +90,7 @@ class MemeNotificationService: Disposable {
         }
 
         shownPopup = createMemePopup(title, imageIcon, project).also { it.show(point) }
+        shownMeme = ShowMemeTask(title, resourcePath, project)
 
         fadeOutPopupFuture = AppExecutorUtil.getAppScheduledExecutorService().schedule({
             invokeLater {
@@ -85,6 +106,7 @@ class MemeNotificationService: Disposable {
         }
         shownPopup?.cancel()
         shownPopup = null
+        shownMeme = null
         if (memeQueue.isNotEmpty()) {
             val (title, memePath, project) = memeQueue.removeFirst()
             if (!KindSettings.getInstance().dontShowManyMemes) {
@@ -165,6 +187,7 @@ class MemeNotificationService: Disposable {
 
     override fun dispose() {
         memeQueue.clear()
+        shownMeme = null
     }
 }
 
