@@ -7,13 +7,16 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.berezhkoe.kindmotivator.notification.MemeNotificationService"/>
+        <applicationService
+                serviceImplementation="com.github.berezhkoe.kindmotivator.notification.MemeNotificationService"/>
         <applicationConfigurable parentId="tools"
                                  instance="com.github.berezhkoe.kindmotivator.settings.KindConfigurable"
                                  id="Settings.CognitiveComplexity"/>
         <applicationService
                 serviceImplementation="com.github.berezhkoe.kindmotivator.settings.KindSettings"/>
         <editorFactoryListener implementation="com.github.berezhkoe.kindmotivator.listeners.KindEditorFactoryListener"/>
+        <terminal.shellCommandHandler
+                implementation="com.github.berezhkoe.kindmotivator.listeners.KindTerminalCommandListener"/>
     </extensions>
 
     <applicationListeners>
