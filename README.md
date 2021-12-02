@@ -1,9 +1,4 @@
 # Kind | Добрый Плагин
-![](src/main/resources/META-INF/pluginIcon.svg)
-
-![Build](https://github.com/berezhkoE/Kind/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 ## Описание (инглиш для маркетплейса)
 <!-- Plugin description -->
