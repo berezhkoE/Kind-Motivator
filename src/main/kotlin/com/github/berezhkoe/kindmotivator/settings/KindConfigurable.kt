@@ -3,11 +3,10 @@ package com.github.berezhkoe.kindmotivator.settings
 import com.intellij.openapi.options.BoundSearchableConfigurable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.layout.panel
-import com.intellij.ui.layout.titledRows
 
-class KindConfigurable: BoundSearchableConfigurable("Kind Motivator", "Kind Motivator", _id = ID) {
+class KindConfigurable: BoundSearchableConfigurable("Kind Plugin", "Kind Plugin", _id = ID) {
     companion object {
-        const val ID = "Settings.KindMotivator"
+        const val ID = "Settings.Kind"
     }
 
     private val settings

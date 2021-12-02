@@ -36,7 +36,7 @@ class ShowMemeAction: DumbAwareAction() {
         } else {
             val hoursWord = StringUtil.pluralize("hour", hourLimit.toInt())
             val hoursStr = if (hourLimit == 1L) hoursWord else "$hourLimit $hoursWord"
-            NotificationGroupManager.getInstance().getNotificationGroup("Kind Motivator Notification Group")
+            NotificationGroupManager.getInstance().getNotificationGroup("Kind Notification Group")
                     .createNotification(
                             title = "Meme limit reached",
                             content = "You've already watched $memeLimit memes within last $hoursStr"

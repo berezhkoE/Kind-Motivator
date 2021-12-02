@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# Kind-Motivator Changelog
+# Kind Changelog
 
 ## [Unreleased]
 ### Added

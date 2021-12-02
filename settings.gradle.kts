@@ -1,1 +1,1 @@
-rootProject.name = "Kind-Motivator"
+rootProject.name = "Kind"
