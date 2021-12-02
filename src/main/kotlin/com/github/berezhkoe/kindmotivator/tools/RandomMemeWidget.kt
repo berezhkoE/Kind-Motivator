@@ -1,11 +1,11 @@
 package com.github.berezhkoe.kindmotivator.tools
 
 import com.github.berezhkoe.kindmotivator.actions.ShowMemeAction
-import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionPlaces
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.IconLoader
 import com.intellij.openapi.wm.StatusBar
 import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.openapi.wm.StatusBarWidgetFactory
@@ -52,5 +52,5 @@ class RandomMemeWidget(private val project: Project) : StatusBarWidget, StatusBa
         ShowMemeAction().actionPerformed(actionEvent)
     }
 
-    override fun getIcon(): Icon = AllIcons.General.InspectionsEye // FIXME
+    override fun getIcon(): Icon = IconLoader.getIcon("/icons/logo_16x16.svg", javaClass)
 }
