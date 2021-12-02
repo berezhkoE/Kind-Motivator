@@ -20,4 +20,7 @@ class KindState: BaseState() {
     var idleThreshold by property(2)
 
     var dontShowManyMemes by property(false)
+
+    var randomMemesNumberLimit by property(5)
+    var randomMemesHoursLimit by property(1)
 }

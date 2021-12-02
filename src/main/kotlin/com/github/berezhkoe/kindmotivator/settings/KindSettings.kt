@@ -42,4 +42,16 @@ class KindSettings : SimplePersistentStateComponent<KindState>(KindState()) {
         set(value) {
             state.dontShowManyMemes = value
         }
+
+    var randomMemesNumberLimit
+        get() = state.randomMemesNumberLimit
+        set(value) {
+            state.randomMemesNumberLimit = value
+        }
+
+    var randomMemesHoursLimit
+        get() = state.randomMemesHoursLimit
+        set(value) {
+            state.randomMemesHoursLimit = value
+        }
 }

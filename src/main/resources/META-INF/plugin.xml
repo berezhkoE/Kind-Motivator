@@ -19,6 +19,7 @@
         <terminal.shellCommandHandler
                 implementation="com.github.berezhkoe.kindmotivator.listeners.KindTerminalCommandListener"/>
         <statusBarWidgetFactory implementation="com.github.berezhkoe.kindmotivator.tools.RandomMemeWidgetFactory"/>
+        <notificationGroup displayType="BALLOON" id="Kind Motivator Notification Group"/>
     </extensions>
 
     <applicationListeners>
