@@ -19,9 +19,8 @@ import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.ActiveComponent
 import com.intellij.ui.awt.RelativePoint
 import com.intellij.util.concurrency.AppExecutorUtil
-import java.awt.Dimension
-import java.awt.Image
-import java.awt.Point
+import java.awt.*
+import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.nio.file.Path
@@ -143,14 +142,9 @@ class MemeNotificationService: Disposable {
             }
         })
 
-        popup.content.addMouseListener(object : MouseListener {
-            override fun mouseClicked(e: MouseEvent?) {
-            }
-
+        popup.content.addMouseListener(object : MouseAdapter() {
             override fun mousePressed(e: MouseEvent?) {
-            }
-
-            override fun mouseReleased(e: MouseEvent?) {
+                expireCurrentMeme(popup)
             }
 
             override fun mouseEntered(e: MouseEvent?) {
@@ -165,6 +159,7 @@ class MemeNotificationService: Disposable {
                 }, TIMEOUT_SECONDS - 2, TimeUnit.SECONDS)
             }
         })
+        popup.content.cursor = Cursor(Cursor.HAND_CURSOR)
         return popup
     }
 
