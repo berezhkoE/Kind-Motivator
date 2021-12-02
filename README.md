@@ -15,6 +15,8 @@ This plugin is actually a БОМБА as it literally **shows you memes** as you 
 <!-- Plugin description end -->
 
 ## Установка
+**ВАЖНО!** Прежде чем установить плагин, удостоверьтесь, что у вас IDEA версии 2021.2.3 или ниже
+
 - Вручную:
 
   Скачайте JAR-файл с [нашей WIKI странички](https://wiki.compscicenter.ru/index.php/%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9_%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD) и установите её вручную, используя
