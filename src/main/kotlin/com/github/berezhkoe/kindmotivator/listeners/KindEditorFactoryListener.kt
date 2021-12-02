@@ -1,6 +1,5 @@
 package com.github.berezhkoe.kindmotivator.listeners
 
-import com.github.berezhkoe.kindmotivator.notification.MemeNotificationService
 import com.github.berezhkoe.kindmotivator.notification.MotivationShower
 import com.github.berezhkoe.kindmotivator.notification.MotivationType
 import com.github.berezhkoe.kindmotivator.settings.KindSettings
@@ -10,8 +9,9 @@ import com.intellij.openapi.editor.event.DocumentListener
 import com.intellij.openapi.editor.event.EditorFactoryEvent
 import com.intellij.openapi.editor.event.EditorFactoryListener
 import com.intellij.util.concurrency.EdtExecutorService
+import java.awt.AWTEvent
 import java.awt.EventQueue
-import java.nio.file.Path
+import java.awt.Toolkit
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 
@@ -64,6 +64,27 @@ class KindEditorFactoryListener : EditorFactoryListener {
                 }
             }
         })
+
+        Toolkit.getDefaultToolkit().addAWTEventListener(
+            {
+                if (status == TimeTrackingStatus.RUNNING) {
+                    val now = System.currentTimeMillis()
+                    val msInState = 0L.coerceAtLeast(now - statusStartedMs)
+                    if (status == TimeTrackingStatus.RUNNING) {
+                        totalTimeMs = 0L.coerceAtLeast(totalTimeMs + msInState)
+                    }
+                    lastActivityMs = now
+                } else {
+                    EventQueue.invokeLater {
+                        setStatus(TimeTrackingStatus.RUNNING)
+                    }
+                }
+            },
+            AWTEvent.KEY_EVENT_MASK or
+                    AWTEvent.MOUSE_EVENT_MASK or
+                    AWTEvent.MOUSE_WHEEL_EVENT_MASK
+        )
+
     }
 
     @Synchronized
@@ -118,7 +139,8 @@ class KindEditorFactoryListener : EditorFactoryListener {
         val sinceLastActivityMs = now - lastActivityMs
         if (sinceLastActivityMs <= idleThresholdMs && sinceLastTickMs >= TICK_JUMP_DETECTION_THRESHOLD_MS) {
             lastTickMs = now
-            MotivationShower.showRandomMeme(MotivationType.Rest,
+            MotivationShower.showRandomMeme(
+                MotivationType.Rest,
                 "${kindSettings.motivationAfterContinuousWork} minutes passed!",
                 editor!!.project!!
             )
