@@ -7,7 +7,9 @@ This plugin is actually a БОМБА as it literally **shows you memes** as you 
 
 - It watches your workflow and supports you when your run fails many times. 
 - It shares your happiness when new tests pass. 
-- It supports you when you work late at night. 
+- It supports you when you work hard.
+- It cheers you when you work late at night or early in the morning
+- And more than that!
 <!-- Plugin description end -->
 
 ## Установка
